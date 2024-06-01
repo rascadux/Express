@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Listado de  libros</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Listado de libros</h1>
+
+    <table border="1 ">
+
+      <tr>
+        <th>ID</th>
+        <th>TITULO</th>
+        <th>AÑO PUBLICACIÓN</th>
+        <th>EDITORIAL</th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <% libros.forEach(function(libro) { %>
+        <tr>
+          <td><%= libro.LibroId %></td>
+          <td><%= libro.LibroName %></td>
+          <td><%= libro.YearReleased %></td>
+          <td><%= libro.Editorial.EditorialName %></td>
+          <td><a href="/borrar/<%= libro.LibroId %>">Borrar</a> </td>
+          <td><a href="/<%= libro.LibroId %>">Editar</a> </td>
+
+
+        </tr>
+      <% }); %>
+    </table>
+    <a href="/nuevo">Nuevo libro ... </a>
+  </body>
+</html>

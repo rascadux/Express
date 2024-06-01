@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Datos del libro</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+<body>
+<h1>Datos del libro</h1>
+<form method="post" action="/guardar">
+  <input type="hidden" name="id" value="<%= (libro ? libro.LibroId: '') %>">
+  <table border="0">
+    <tr>
+      <td>Título:</td>
+      <td><input type="text" name="titulo" size="100" maxlength="100" value="<%= (libro ? libro.LibroName: '') %>" /> </td>
+    </tr>
+    <tr>
+      <td>Año de publicación:</td>
+      <td><input type="number" name="anyo" size="4"  maxlength="4" value="<%= (libro ? libro.YearReleased: '') %>" /></td>
+    </tr>
+    <tr>
+      <td>Escritores:</td>
+      <td>
+        <% escritores.forEach(function(escritor) {
+          var selected = "";
+          if (libro && libro.Escritors.some(item => item.EscritorId === escritor.EscritorId)) {
+            selected = "checked"
+          }
+        %>
+        <input type="checkbox" name="escritores" <%= selected %>  value="<%= escritor.EscritorId %>"><%= escritor.EscritorName  %> <br/>
+
+        <% }); %>
+      </td>
+    </tr>
+    <tr>
+      <td>Géneros:</td>
+      <td>
+        <% generos.forEach(function(genero) {
+          var selected = "";
+          if (libro && libro.Generos.some(item => item.GeneroId === genero.GeneroId)) {
+            selected = "checked"
+          }
+        %>
+
+        <input type="checkbox" name="generos" <%= selected %>  value="<%= genero.GeneroId %>"><%= genero.GeneroName  %> <br/>
+
+        <% }); %>
+      </td>
+    </tr>
+    <tr>
+      <td>Editorial:</td>
+      <td>
+        <select name="editorial">
+          <% editoriales.forEach(function(editorial) {
+            var selected = "";
+            if (libro && editorial.EditorialId === libro.Editorial.EditorialId) {
+              selected = "selected"
+            }
+          %>
+          <option value="<%= editorial.EditorialId %>" label="<%= editorial.EditorialName %>" <%= selected %> />
+
+          <% }); %>
+        </select>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2"> <button>Guardar</button></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
